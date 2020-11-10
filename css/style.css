@@ -1,0 +1,265 @@
+:root {
+    --fuentePrincipal: 'Staatliches', cursive;
+    --primario: #9c27b0;
+    --primarioOscuro: #89119D;
+    --secundario: #FFCE00;
+}
+
+
+/*Snipet Paul Irish*/
+
+html {
+    font-size: 62.5%;
+    /*esto es para usar la medida de rem, que es mucho más responsivo que el px*/
+    box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+body {
+    background-color: var(--primario);
+    line-height: 2;
+    font-size: 2rem;
+}
+
+body.footer-fijo {
+    /*esto es para que el footer quede fijo abajo*/
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+body.footer-fijo main {
+    flex: 1;
+    /*esto le dice al footer, crece hacia abajo todo lo que puedas crecer, para que no quede espacio*/
+}
+
+h1 {
+    color: var(--secundario);
+    text-align: center;
+    font-size: 4rem;
+    font-family: var(--fuentePrincipal);
+}
+
+p {
+    font-size: 1.8rem;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #ffffff;
+}
+
+.contenedor {
+    max-width: 1000px;
+    /*tamaño del contenedor*/
+    width: 95%;
+    margin: 0 auto;
+    /*para centrar el contenido en el contenedor*/
+}
+
+img {
+    max-width: 100%;
+    /*esto hace todas las imagenes responsivas por default*/
+}
+
+.header {
+    display: grid;
+    /*se debe indicar el grid para poder centrar, sino no lo hace*/
+    justify-content: center;
+    /*esto es para centrar la imagen*/
+    padding: 3rem 0;
+    /*para separar hacia abajo header de barra*/
+}
+
+.barra {
+    background-color: var(--primarioOscuro);
+    padding: 1rem 0;
+    /*el ancho de la barra, arriba y abajo 1rem e izq y der 0*/
+}
+
+.barra .nav {
+    display: grid;
+    /*para trabajar con CCS grid se requiere indicar acá*/
+    grid-template-columns: repeat(2, 200px);
+    /*esto es para indicar que son dos columnas, cada una de 200px. El de 200px es un ancho fijo, también se podría colocar auto pero en ese caso toma lo que cree que requiere, es mejor definirlo uno*/
+    column-gap: 1rem;
+    /*genera un espacio entre las columnas, es facil verlo con inspeccionar en firefox developer, en la pestaña diseño luego de presionar donde esta el grid*/
+    justify-content: center;
+}
+
+.barra .nav a {
+    font-family: var(--fuentePrincipal);
+    font-size: 3rem;
+    text-align: center;
+    /*para que ambos elementos se centren dentro de sus columnas*/
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.barra .nav a:hover {
+    color: var(--secundario);
+    /*cuando pasa el cursor cambia el color de los enlaces*/
+}
+
+.lista-productos {
+    /*este es el elemento padre que afecta a todos los demás con Grid, es muy importante que así sea, sino no funciona bien Grid*/
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    /*dos columnas, cada una con una fraccion lo que equivale a 50% para cada columna*/
+    /*dos columnas de una fracción cada una, lo que es igual a dos columnas con 50% cada una*/
+    gap: 2rem;
+    /*separación entre columnas, para dar espacio entre fotos*/
+}
+
+@media (min-width: 768px) {
+    /*para pantallas más grandes de 768px serán tres columnas, cada una una fraccion, lo que sería idem a 3 columnas de 33.3% c/u*/
+    .lista-productos {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.producto {
+    background-color: var(--primarioOscuro);
+    padding: 1rem;
+    /*margen/espacio hacia adentro*/
+}
+
+.contenido-producto p {
+    font-family: var(--fuentePrincipal);
+    color: #ffffff;
+    text-align: center;
+    margin: 1rem 0;
+    line-height: 1.2;
+    /*interlineado*/
+}
+
+.contenido-producto .titulo {
+    font-size: 4rem;
+}
+
+.contenido-producto .precio {
+    font-size: 2.8rem;
+    color: var(--secundario);
+}
+
+.grafico {
+    min-height: 300px;
+    /*esto hace que ambas imagenes se vean cuando la pantalla es pequeña, sino se agrega se pierden*/
+    grid-column: 1 / 3;
+    /*para hacer estos calculos lo mejor es hacerlo con firefox developer. Column son los numeros de izquierda a derecha*/
+    /*esto aplica para ambos graficos*/
+    background-size: cover;
+    background-position: center center;
+    /*esto es para que las imagenes simpre se muestren desde el centro, sin importar el tamaño*/
+}
+
+.grafico-1 {
+    background-image: url(../img/grafico1.jpg);
+    grid-row: 2 / 3;
+    /*para hacer estos calculos lo mejor es hacerlo con firefox developer. Row son los numeros que van de arriba hacia abajo*/
+}
+
+.grafico-2 {
+    /*así se vería de tamaño pequeño*/
+    background-image: url(../img/grafico2.jpg);
+    grid-row: 8 / 9;
+    /*la posicion del grafico en tamaño pequeño*/
+    grid-column: 1 / 3;
+    /*esto es para que tome todo el espacio disponible en tamaño pequeño*/
+}
+
+@media (min-width: 768px) {
+    /*esto se ve así desde 768px a pantallas más grandes*/
+    /*esto de debe hacer ya que el grid es de tres columnas originalmente pero en el grafico-2 movemos hasta la 4 y deformaba el diseño*/
+    .grafico-2 {
+        grid-row: 5 / 6;
+        grid-column: 2 / 4;
+    }
+}
+
+
+/* Footer */
+
+.footer {
+    background-color: var(--primarioOscuro);
+    padding: 1rem 0;
+    margin-top: 2rem;
+}
+
+.copyright {
+    font-family: var(--fuentePrincipal);
+    color: #ffffff;
+    font-size: 2.2rem;
+    text-align: center;
+}
+
+
+/** NOSOTROS **/
+
+@media (min-width: 768px) {
+    .contenedor-informacion {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        /*2 partes, cada una toma 50%*/
+        column-gap: 2rem;
+        /*espacio entre texto e imagen, solo aplica a columnas*/
+    }
+}
+
+
+/** PRODUCTO **/
+
+.imagen-producto {
+    width: 100%;
+}
+
+.formulario-pedido {
+    display: grid;
+    grid-template-columns: repeat(3, 33.3%);
+    /*hace tres columnas del mismo tamaño*/
+    grid-template-rows: repeat(2, 6rem);
+    /*hace dos filas, al final son dos filas de 3 elementos cada una*/
+    column-gap: 1rem;
+    /*espacio entre talla y cantidad. Column-gap aplica solo entre columnas, no da espacio entre filas*/
+    row-gap: 1rem;
+    /*espacio entre cantidad/talla contra boton carrito. Row-gap da espacio entre filas*/
+    grid-gap: 1rem;
+    /*espacio entre talla, cantidad y botón. Grid gap da espacio hacia las 4 direcciones*/
+}
+
+.campo {
+    background-color: transparent;
+    border: 5px solid #ffffff;
+    font-family: var(--fuentePrincipal);
+    font-size: 3rem;
+    padding: 1rem;
+    width: 100%;
+    color: #ffffff;
+}
+
+.talla {
+    appearance: none;
+    border-radius: 0;
+    grid-column: 1 / 3;
+}
+
+.cantidad {
+    border-radius: 0;
+}
+
+.boton {
+    background-color: var(--secundario);
+    font-size: 2rem;
+    font-family: var(--fuentePrincipal);
+    border-radius: 0;
+    border: none;
+    transition: background-color .3s ease;
+    grid-column: 1 / 4;
+}
+
+.boton:hover {
+    cursor: pointer;
+    background-color: rgb(233, 187, 2);
+}
